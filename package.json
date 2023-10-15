@@ -1,0 +1,12 @@
+{
+  "name": "guess-melody-app",
+  "version": "1.0.0",
+  "description": "Технологический стек: React RTK TS Jest",
+  "main": "index.js",
+  "scripts": {
+    "client-start": "cd client & npm run dev",
+    "start": "npm run client-start"
+  },
+  "author": "",
+  "license": "ISC"
+}
