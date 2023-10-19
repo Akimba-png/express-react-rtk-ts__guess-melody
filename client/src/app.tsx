@@ -1,8 +1,9 @@
-import { WelcomeScreen } from './screens/welcome-screen/welcome-screen';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './router/router';
 
 function App(): JSX.Element {
   return (
-    <WelcomeScreen />
+    <RouterProvider router={router} />
   );
 }
 
