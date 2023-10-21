@@ -1,0 +1,237 @@
+[
+  {
+    "id": "5d6d2510-58ee-4f54-9574-d835799b7485",
+    "type": "artist",
+    "answers": [
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Steve_Adams.jpg",
+        "artist": "Steve Adams"
+      },
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Zachariah_Hickman.jpg",
+        "artist": "Zachariah Hickman"
+      },
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Nat_Keefe.jpg",
+        "artist": "Nat Keefe & Hot Buttered Rum"
+      }
+    ],
+    "song": {
+      "artist": "Steve Adams",
+      "src": "https://13.design.pages.academy/static/music/Tubby.mp3"
+    },
+    "systemGroup": "question"
+  },
+  {
+    "id": "f4b2178d-704b-42eb-bd48-31b8cd60dfaa",
+    "type": "artist",
+    "answers": [
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Zachariah_Hickman.jpg",
+        "artist": "Zachariah Hickman"
+      },
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Carmen_Maria.jpg",
+        "artist": "Carmen Maria and Edu Espinal"
+      },
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Jeremy_Korpas.jpg",
+        "artist": "Jeremy Korpas"
+      }
+    ],
+    "song": {
+      "artist": "Jeremy Korpas",
+      "src": "https://13.design.pages.academy/static/music/Manic_No_Depression.mp3"
+    },
+    "systemGroup": "question"
+  },
+  {
+    "id": "898a760a-ca1c-49a9-935d-128dde89a885",
+    "type": "artist",
+    "answers": [
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Ofshane.jpg",
+        "artist": "Ofshane"
+      },
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Jeremy_Korpas.jpg",
+        "artist": "Jeremy Korpas"
+      },
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Bobby_Richards.jpg",
+        "artist": "Bobby Richards"
+      }
+    ],
+    "song": {
+      "artist": "Ofshane",
+      "src": "https://13.design.pages.academy/static/music/Meet_&_Fun.mp3"
+    },
+    "systemGroup": "question"
+  },
+  {
+    "id": "290f1eb3-800f-4d3e-b9e5-331d6940ecc4",
+    "type": "genre",
+    "genre": "electronic",
+    "answers": [
+      {
+        "src": "https://13.design.pages.academy/static/music/19th_Floor.mp3",
+        "genre": "electronic"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/Say_Yeah.mp3",
+        "genre": "electronic"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/She_No_Dull_Beat.mp3",
+        "genre": "reggae"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/Manic_No_Depression.mp3",
+        "genre": "alternative"
+      }
+    ],
+    "systemGroup": "question"
+  },
+  {
+    "id": "5b52f6de-c9be-4ee4-9f4f-888235781bd1",
+    "type": "artist",
+    "answers": [
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Zachariah_Hickman.jpg",
+        "artist": "Zachariah Hickman"
+      },
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Nana_Kwabena.jpg",
+        "artist": "Nana Kwabena"
+      },
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Dan_Henig.jpg",
+        "artist": "Dan Henig"
+      }
+    ],
+    "song": {
+      "artist": "Nana Kwabena",
+      "src": "https://13.design.pages.academy/static/music/She_No_Dull_Beat.mp3"
+    },
+    "systemGroup": "question"
+  },
+  {
+    "id": "001395c0-2bfd-4bb9-bda0-e21009072143",
+    "type": "genre",
+    "genre": "reggae",
+    "answers": [
+      {
+        "src": "https://13.design.pages.academy/static/music/Manic_No_Depression.mp3",
+        "genre": "alternative"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/Oh_Fire.mp3",
+        "genre": "reggae"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/Savannah_Sunshine.mp3",
+        "genre": "reggae"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/Outlaw's_Farewell_partI.mp3",
+        "genre": "country"
+      }
+    ],
+    "systemGroup": "question"
+  },
+  {
+    "id": "b16eebc1-f64a-40db-901e-9e10a4a04e9d",
+    "type": "genre",
+    "genre": "electronic",
+    "answers": [
+      {
+        "src": "https://13.design.pages.academy/static/music/Dance_Of_The_Fireflies.mp3",
+        "genre": "country"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/Breatha.mp3",
+        "genre": "electronic"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/Say_Yeah.mp3",
+        "genre": "electronic"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/Kurt.mp3",
+        "genre": "alternative"
+      }
+    ],
+    "systemGroup": "question"
+  },
+  {
+    "id": "fa1dde25-f10f-459c-8f93-a85ab6d3abfc",
+    "type": "genre",
+    "genre": "country",
+    "answers": [
+      {
+        "src": "https://13.design.pages.academy/static/music/Meet_&_Fun.mp3",
+        "genre": "electronic"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/Tubby.mp3",
+        "genre": "reggae"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/Grey_Flannel.mp3",
+        "genre": "alternative"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/Outlaw's_Farewell_partI.mp3",
+        "genre": "country"
+      }
+    ],
+    "systemGroup": "question"
+  },
+  {
+    "id": "9998bf1b-beba-49cd-8dc0-baad522b8e4e",
+    "type": "genre",
+    "genre": "electronic",
+    "answers": [
+      {
+        "src": "https://13.design.pages.academy/static/music/Outlaw's_Farewell_partI.mp3",
+        "genre": "country"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/19th_Floor.mp3",
+        "genre": "electronic"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/Savannah_Sunshine.mp3",
+        "genre": "reggae"
+      },
+      {
+        "src": "https://13.design.pages.academy/static/music/Breatha.mp3",
+        "genre": "electronic"
+      }
+    ],
+    "systemGroup": "question"
+  },
+  {
+    "id": "80017edd-8cd1-4e20-8b20-d11d9d897fb8",
+    "type": "artist",
+    "answers": [
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Ofshane.jpg",
+        "artist": "Ofshane"
+      },
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Carmen_Maria.jpg",
+        "artist": "Carmen Maria and Edu Espinal"
+      },
+      {
+        "picture": "https://13.design.pages.academy/static/artist/Zachariah_Hickman.jpg",
+        "artist": "Zachariah Hickman"
+      }
+    ],
+    "song": {
+      "artist": "Zachariah Hickman",
+      "src": "https://13.design.pages.academy/static/music/Mourning_Dove.mp3"
+    },
+    "systemGroup": "question"
+  }
+]
