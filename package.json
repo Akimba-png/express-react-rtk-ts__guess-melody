@@ -4,9 +4,15 @@
   "description": "Технологический стек: React RTK TS Jest",
   "main": "index.js",
   "scripts": {
-    "client-start": "cd client & npm run dev",
-    "start": "npm run client-start"
+    "client-dev": "cd client & npm run dev",
+    "server-dev": "cd server & npm run dev",
+    "server-start": "cd server & npm run start",
+    "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\"",
+    "start": "concurrently \"npm run server-start\" \"npm run client-dev\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
