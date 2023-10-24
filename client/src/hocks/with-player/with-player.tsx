@@ -1,30 +1,26 @@
 import { ComponentType, useState } from 'react';
-import { Player } from './../../components/player/player';
+import { Player } from '../../components/player/player';
 
-type RenderProps = {
-  render: (index: number) => JSX.Element;
+type RenderProp = {
+  render: (id: number) => JSX.Element;
 };
 
-function withPlayer<T>(Component: ComponentType<T>): ComponentType<
-  T & RenderProps
-> {
+function withPlayer<T>(
+  Component: ComponentType<T & RenderProp>
+): ComponentType<T> {
   function WithPlayer(props: T) {
-    const [ activePlayer, setActivePlayer ] = useState(-1);
+    const [activePlayer, setActivePlayer] = useState(-1);
     return (
       <Component
         {...props}
-        render={(index: number) => {
-          return (
-            <Player
-              isPlaying={activePlayer === index}
-              onPlayButtonClick={() => {
-                setActivePlayer(
-                  activePlayer === index ? -1 : index
-                );
-              }}
-            />
-          );
-        }}
+        render={(id: number) => (
+          <Player
+            isPlaying={activePlayer === id}
+            onPlayButtonClick={() =>
+              setActivePlayer(activePlayer === id ? -1 : id)
+            }
+          />
+        )}
       />
     );
   }
