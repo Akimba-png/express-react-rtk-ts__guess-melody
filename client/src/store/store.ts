@@ -1,10 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createApi } from '../http/create-api';
+import { gameDataSlice } from './slices/game-data-slice/game-data-slice';
 
 const api = createApi();
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    [gameDataSlice.name]: gameDataSlice.reducer,
+  },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     thunk: {
       extraArgument: api,

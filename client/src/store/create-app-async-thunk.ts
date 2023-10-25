@@ -6,4 +6,5 @@ export const createAppAsyncThunk = createAsyncThunk.withTypes<{
   state: RootState;
   dispatch: AppDispatch;
   extra: AxiosInstance;
+  rejectValue: string;
 }>();
