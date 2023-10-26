@@ -3,7 +3,7 @@ import { ApiRoute } from '../constants/const';
 
 export const createApi = () => {
   const api = axios.create({
-    baseURL: ApiRoute.Questions,
+    baseURL: ApiRoute.BaseUrl,
     timeout: 5000,
   });
 
