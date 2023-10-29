@@ -1,7 +1,11 @@
+import { useAppSelector } from './../../hooks/store-hooks';
 import { GenreGame } from './../../components/genre-game/genre-game';
 import { ArtistGame } from './../../components/artist-game/artist-game';
+import { LoadingStatus } from '../../constants/const';
 
 function GameScreen(): JSX.Element {
+  const { questions, loadingStatus } = useAppSelector(state => state.gameData);
+
   const GameComponent = 'genre' === 'genre' ? GenreGame : ArtistGame;
   const gameType = 'genre' === 'genre' ? 'game--genre' : 'game--artist';
 
@@ -23,7 +27,9 @@ function GameScreen(): JSX.Element {
           <div className="wrong"></div>
         </div>
       </header>
-      <GameComponent />
+      { loadingStatus === LoadingStatus.Pending && <h1>Loading</h1> }
+      { !!questions.length && <GameComponent />}
+
     </section>
   );
 }
