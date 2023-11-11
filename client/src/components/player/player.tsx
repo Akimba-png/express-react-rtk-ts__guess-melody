@@ -2,25 +2,27 @@ import { useRef, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 type PlayerProps = {
+  src: string;
   isPlaying: boolean;
   onPlayButtonClick: () => void;
 };
 
 function Player({
+  src,
   isPlaying,
   onPlayButtonClick,
 }: PlayerProps): JSX.Element {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
+  const [ isLoaded, setIsLoaded ] = useState<boolean>(false);
 
-  const audioLoadHandler = () => setIsLoading(true);
+  const audioLoadHandler = () => setIsLoaded(true);
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) {
       return;
     }
-    if (!isLoading) {
+    if (!isLoaded) {
       audio.addEventListener('loadeddata', audioLoadHandler);
     }
     return () => audio.removeEventListener('loadeddata', audioLoadHandler);
@@ -32,12 +34,12 @@ function Player({
       return;
     }
 
-    if (isLoading && isPlaying) {
+    if (isLoaded && isPlaying) {
       audio.play();
       return;
     }
     audio.pause();
-  }, [isLoading, isPlaying]);
+  }, [isLoaded, isPlaying]);
 
   return (
     <>
@@ -52,7 +54,7 @@ function Player({
       <div className="track__status">
         <audio
           ref={audioRef}
-          src="https://13.design.pages.academy/static/music/Tubby.mp3"
+          src={src}
         ></audio>
       </div>
     </>
