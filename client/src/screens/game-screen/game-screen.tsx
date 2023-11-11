@@ -1,18 +1,36 @@
+import { Navigate } from 'react-router-dom';
+import { useGame } from '../../hooks/useGame';
 import { useAppSelector } from './../../hooks/store-hooks';
 import { GenreGame } from './../../components/genre-game/genre-game';
 import { ArtistGame } from './../../components/artist-game/artist-game';
-import { LoadingStatus } from '../../constants/const';
-import { getQuestion } from '../../store/selectors';
+import { AppRoute } from '../../constants/const';
 
 function GameScreen(): JSX.Element {
-  const { loadingStatus } = useAppSelector(state => state.gameData);
-  const question = useAppSelector(getQuestion);
+  const { questions } = useAppSelector(state => state.gameData);
+  const [ isLoading, isWin, isFail, step ] = useGame();
 
-  if (loadingStatus === LoadingStatus.Pending) {
+  if (isLoading) {
     return (<h1>loading</h1>);
   }
 
-  const GameComponent = question.type === 'genre' ? GenreGame : ArtistGame;
+  if (!questions.length) {
+    return (<h1>А вопросов-то и нет</h1>)
+  }
+
+  if (isWin) {
+    return (
+      <Navigate to={AppRoute.Success} />
+    );
+  }
+
+  if (isFail) {
+    return (
+      <Navigate to={AppRoute.Fail} />
+    );
+  }
+
+  const question = questions[step];
+
   const gameType = question.type === 'genre' ? 'game--genre' : 'game--artist';
 
   return (
@@ -33,7 +51,13 @@ function GameScreen(): JSX.Element {
           <div className="wrong"></div>
         </div>
       </header>
-      <GameComponent />
+      {
+        question.type === 'artist' ? (
+          <ArtistGame />
+        ) : (
+          <GenreGame />
+        )
+      }
     </section>
   );
 }
