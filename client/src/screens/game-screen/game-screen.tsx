@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { useGame } from '../../hooks/useGame';
 import { useAppSelector } from './../../hooks/store-hooks';
 import { GenreGame } from './../../components/genre-game/genre-game';
-import { ArtistGame } from './../../components/artist-game/artist-game';
+import { ArtistGameWithPlayer } from './../../components/artist-game/artist-game';
 import { AppRoute } from '../../constants/const';
 
 function GameScreen(): JSX.Element {
@@ -53,7 +53,7 @@ function GameScreen(): JSX.Element {
       </header>
       {
         question.type === 'artist' ? (
-          <ArtistGame />
+          <ArtistGameWithPlayer question={question}/>
         ) : (
           <GenreGame />
         )

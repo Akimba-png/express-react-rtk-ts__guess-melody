@@ -1,40 +1,42 @@
-function ArtistGame(): JSX.Element {
+import { withPlayer } from './../../hocks/with-player/with-player';
+import { useUserAnswer } from '../../hooks/useUserAnswer';
+import { ArtistItem } from '../artist-item/artist-item';
+import { ArtistQuestion } from '../../models/data';
+
+const TRACK_NUMBER = 1;
+
+type ArtistGameProps = {
+  question: ArtistQuestion;
+  render: (id: number, src: string) => JSX.Element;
+};
+
+function ArtistGame({render, question}: ArtistGameProps): JSX.Element {
+  const [ userAnswerHandler ] = useUserAnswer(question.song.artist);
   return (
     <section className="game__screen">
       <h2 className="game__title">Кто исполняет эту песню?</h2>
       <div className="game__track">
         <div className="track">
-          <button className="track__button track__button--play" type="button"></button>
-          <div className="track__status">
-            <audio></audio>
-          </div>
+          {render(TRACK_NUMBER, question.song.src)}
         </div>
       </div>
       <form className="game__artist">
-        <div className="artist">
-          <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-1" id="answer-1" />
-          <label className="artist__name" htmlFor="answer-1">
-            <img className="artist__picture" src="img/placeholder.jpg" alt="Пелагея" />
-            Пелагея
-          </label>
-        </div>
-        <div className="artist">
-          <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-2" id="answer-2" />
-          <label className="artist__name" htmlFor="answer-2">
-            <img className="artist__picture" src="img/placeholder.jpg" alt="Пелагея" />
-            Краснознаменная дивизия имени моей бабушки
-          </label>
-        </div>
-        <div className="artist">
-          <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-3" id="answer-3" />
-          <label className="artist__name" htmlFor="answer-3">
-            <img className="artist__picture" src="img/placeholder.jpg" alt="Пелагея" />
-            Lorde
-          </label>
-        </div>
+        {
+          question.answers.map(({artist, picture}, i) => {
+            return (
+              <ArtistItem
+                artist={artist}
+                url={picture}
+                onUserAnswer={userAnswerHandler}
+                key={picture + i}
+              />
+            );
+          })
+        }
       </form>
     </section>
   );
 }
 
-export { ArtistGame };
+const ArtistGameWithPlayer = withPlayer(ArtistGame);
+export { ArtistGameWithPlayer };
