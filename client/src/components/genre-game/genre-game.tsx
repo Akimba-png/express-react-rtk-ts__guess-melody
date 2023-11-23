@@ -1,52 +1,45 @@
-function GenreGame(): JSX.Element {
+import { withPlayer } from './../../hocks/with-player/with-player';
+import { useGenreAnswer } from '../../hooks/useGenreAnwer';
+import { GenreQuestion } from '../../models/data';
+import { GameItem } from '../game-item/game-item';
+
+type GenreGameProps = {
+  question: GenreQuestion;
+  render: (id: number, src: string) => JSX.Element;
+};
+
+function GenreGame({ question, render }: GenreGameProps): JSX.Element {
+  const [answerHandler, submitHandler] = useGenreAnswer(
+    question.genre,
+    question.answers
+  );
   return (
     <section className="game__screen">
-      <h2 className="game__title">Выберите инди-рок треки</h2>
+      <h2 className="game__title">Выберите {question.genre} треки</h2>
       <form className="game__tracks">
-        <div className="track">
-          <button className="track__button track__button--play" type="button"></button>
-          <div className="track__status">
-            <audio></audio>
-          </div>
-          <div className="game__answer">
-            <input className="game__input visually-hidden" type="checkbox" name="answer" value="answer-1" id="answer-1" />
-            <label className="game__check" htmlFor="answer-1">Отметить</label>
-          </div>
-        </div>
-        <div className="track">
-          <button className="track__button track__button--play" type="button"></button>
-          <div className="track__status">
-            <audio></audio>
-          </div>
-          <div className="game__answer">
-            <input className="game__input visually-hidden" type="checkbox" name="answer" value="answer-1" id="answer-20" />
-            <label className="game__check" htmlFor="answer-2">Отметить</label>
-          </div>
-        </div>
-        <div className="track">
-          <button className="track__button track__button--pause" type="button"></button>
-          <div className="track__status">
-            <audio></audio>
-          </div>
-          <div className="game__answer">
-            <input className="game__input visually-hidden" type="checkbox" name="answer" value="answer-1" id="answer-3" />
-            <label className="game__check" htmlFor="answer-3">Отметить</label>
-          </div>
-        </div>
-        <div className="track">
-          <button className="track__button track__button--play" type="button"></button>
-          <div className="track__status">
-            <audio></audio>
-          </div>
-          <div className="game__answer">
-            <input className="game__input visually-hidden" type="checkbox" name="answer" value="answer-1" id="answer-4" />
-            <label className="game__check" htmlFor="answer-4">Отметить</label>
-          </div>
-        </div>
-        <button className="game__submit button" type="submit">Ответить</button>
+        {question.answers.map((answer, i) => {
+          const key = answer.src + i;
+          return (
+            <GameItem
+              key={key}
+              genre={answer.genre}
+              index={i}
+              renderPlayer={() => render(i, answer.src)}
+              onChange={() => answerHandler(i)}
+            />
+          );
+        })}
+        <button
+          onClick={submitHandler}
+          className="game__submit button"
+          type="submit"
+        >
+          Ответить
+        </button>
       </form>
     </section>
   );
 }
 
-export { GenreGame };
+const GenreGameWithPlayer = withPlayer(GenreGame);
+export { GenreGameWithPlayer };
