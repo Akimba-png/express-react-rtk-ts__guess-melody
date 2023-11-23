@@ -3,6 +3,7 @@ import { useGame } from '../../hooks/useGame';
 import { useAppSelector } from './../../hooks/store-hooks';
 import { GenreGameWithPlayer } from './../../components/genre-game/genre-game';
 import { ArtistGameWithPlayer } from './../../components/artist-game/artist-game';
+import { MistakeList } from '../../components/mistake-list/mistake-list';
 import { AppRoute } from '../../constants/const';
 
 function GameScreen(): JSX.Element {
@@ -45,11 +46,7 @@ function GameScreen(): JSX.Element {
             style={{filter: 'url(#blur)', transform: 'rotate(-90deg) scaleY(-1)', transformOrigin: 'center'}}
           />
         </svg>
-        <div className="game__mistakes">
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-        </div>
+        <MistakeList />
       </header>
       {
         question.type === 'artist' ? (
