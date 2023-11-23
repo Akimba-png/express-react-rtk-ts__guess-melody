@@ -1,4 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/store-hooks';
+import { AppRoute } from '../../constants/const';
+import {
+  resetGame
+ } from '../../store/slices/game-process-slice/game-process-slice';
+
 function FailScreen(): JSX.Element {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   return (
     <section className="result">
       <div className="result__logo">
@@ -13,8 +22,15 @@ function FailScreen(): JSX.Element {
       <p className="result__total result__total--fail">
         У вас закончились все попытки. Ничего, повезёт в следующий раз!
       </p>
-      <button className="replay" type="button">
-        Попробовать ещё раз
+      <button
+        onClick={() => {
+          dispatch(resetGame());
+          navigate(AppRoute.Game);
+        }}
+        className="replay"
+        type="button"
+        >
+          Попробовать ещё раз
       </button>
     </section>
   );

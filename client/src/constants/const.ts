@@ -1,9 +1,9 @@
 export enum AppRoute {
   Main = '/',
-  Login = 'login',
-  Game = 'game',
-  Success = 'success',
-  Fail = 'fail',
+  Login = '/login',
+  Game = '/game',
+  Success = '/success',
+  Fail = '/fail',
 }
 
 export enum LoadingStatus {
