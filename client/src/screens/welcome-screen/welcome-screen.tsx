@@ -1,4 +1,9 @@
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../constants/const';
+
 function WelcomeScreen(): JSX.Element {
+  const navigate = useNavigate();
+
   return (
     <section className="welcome">
       <div className="welcome__logo">
@@ -9,7 +14,10 @@ function WelcomeScreen(): JSX.Element {
           height="83"
         />
       </div>
-      <button className="welcome__button">
+      <button
+        onClick={() => navigate(AppRoute.Game)}
+        className="welcome__button"
+      >
         <span className="visually-hidden">Начать игру</span>
       </button>
       <h2 className="welcome__rules-title">Правила игры</h2>
