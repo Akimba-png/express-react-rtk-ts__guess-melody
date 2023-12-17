@@ -1,21 +1,27 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { createApi } from '../http/create-api';
 import { gameDataSlice } from './slices/game-data-slice/game-data-slice';
 import { gameProcessSlice } from './slices/game-process-slice/game-process-slice';
 
 const api = createApi();
 
-export const store = configureStore({
-  reducer: {
-    [gameDataSlice.name]: gameDataSlice.reducer,
-    [gameProcessSlice.name]: gameProcessSlice.reducer,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    thunk: {
-      extraArgument: api,
-    },
-  })
+const rootReducer = combineReducers({
+  [gameDataSlice.name]: gameDataSlice.reducer,
+  [gameProcessSlice.name]: gameProcessSlice.reducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export const setupStore = (preloadedState: Partial<RootState> = {}) => {
+  return configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }),
+    preloadedState,
+  });
+};
+
+export type AppStore = ReturnType<typeof setupStore>;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = AppStore['dispatch'];
