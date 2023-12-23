@@ -1,4 +1,4 @@
-type GameItemProps = {
+export type GameItemProps = {
   genre: string;
   index: number;
   onChange: () => void;
