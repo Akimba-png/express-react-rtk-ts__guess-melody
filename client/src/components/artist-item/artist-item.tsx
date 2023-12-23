@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 
-type ArtistItemProps = {
+export type ArtistItemProps = {
   artist: string;
   url: string;
   onUserAnswer: (answer: string) => void;
