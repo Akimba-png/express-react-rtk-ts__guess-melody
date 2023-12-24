@@ -5,7 +5,7 @@ import { ArtistQuestion } from '../../models/data';
 
 const TRACK_NUMBER = 1;
 
-type ArtistGameProps = {
+export type ArtistGameProps = {
   question: ArtistQuestion;
   render: (id: number, src: string) => JSX.Element;
 };
@@ -39,4 +39,4 @@ function ArtistGame({render, question}: ArtistGameProps): JSX.Element {
 }
 
 const ArtistGameWithPlayer = withPlayer(ArtistGame);
-export { ArtistGameWithPlayer };
+export { ArtistGameWithPlayer, ArtistGame };
