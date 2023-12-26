@@ -32,7 +32,7 @@ function GenreGame({ question, render }: GenreGameProps): JSX.Element {
         <button
           onClick={submitHandler}
           className="game__submit button"
-          type="submit"
+          type="button"
         >
           Ответить
         </button>
@@ -42,4 +42,4 @@ function GenreGame({ question, render }: GenreGameProps): JSX.Element {
 }
 
 const GenreGameWithPlayer = withPlayer(GenreGame);
-export { GenreGameWithPlayer };
+export { GenreGameWithPlayer, GenreGame };
