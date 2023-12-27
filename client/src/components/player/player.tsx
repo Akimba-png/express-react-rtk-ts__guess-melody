@@ -55,6 +55,7 @@ function Player({
         <audio
           ref={audioRef}
           src={src}
+          data-testid="audio"
         ></audio>
       </div>
     </>
