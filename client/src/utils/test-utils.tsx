@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux';
-import { type RenderOptions, render } from '@testing-library/react';
+import { type RenderOptions, type RenderHookOptions, render, renderHook } from '@testing-library/react';
 import { setupStore } from '../store/store';
 import type { PropsWithChildren, ReactElement } from 'react';
 import type { AppStore, RootState } from '../store/store';
@@ -30,3 +30,29 @@ export function renderWithProviders(
     ...render(ui, {wrapper: Wrapper, ...renderOptions})
   }
 };
+
+interface ExtendedRenderHookOptions extends RenderHookOptions<unknown> {
+  store?: AppStore,
+  preloadedState?: Partial<RootState>,
+}
+
+export function renderHookWithProviders(
+  render: (initialProps?: unknown) => unknown,
+  {
+    preloadedState = {},
+    store = setupStore(preloadedState),
+    ...renderHookOptions
+  }: ExtendedRenderHookOptions = {}
+) {
+  function Wrapper({children}: PropsWithChildren) {
+    return (
+      <Provider store={store}>
+        {children}
+      </Provider>
+    );
+  }
+  return {
+    store,
+    ...renderHook(render, {wrapper: Wrapper, ...renderHookOptions})
+  };
+}
