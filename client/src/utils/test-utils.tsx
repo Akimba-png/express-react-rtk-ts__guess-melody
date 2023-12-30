@@ -1,8 +1,12 @@
-import { Provider } from 'react-redux';
-import { type RenderOptions, type RenderHookOptions, render, renderHook } from '@testing-library/react';
-import { setupStore } from '../store/store';
 import type { PropsWithChildren, ReactElement } from 'react';
-import type { AppStore, RootState } from '../store/store';
+import { Provider } from 'react-redux';
+import {
+  type RenderOptions,
+  type RenderHookOptions,
+  render,
+  renderHook,
+} from '@testing-library/react';
+import  { type AppStore, type RootState, setupStore } from '../store/store';
 
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
@@ -31,18 +35,18 @@ export function renderWithProviders(
   }
 };
 
-interface ExtendedRenderHookOptions extends RenderHookOptions<unknown> {
+interface ExtendedRenderHookOptions<T> extends RenderHookOptions<T> {
   store?: AppStore,
   preloadedState?: Partial<RootState>,
 }
 
-export function renderHookWithProviders(
-  render: (initialProps?: unknown) => unknown,
+export function renderHookWithProviders<U, R>(
+  render: (initialProps: U) => R,
   {
     preloadedState = {},
     store = setupStore(preloadedState),
     ...renderHookOptions
-  }: ExtendedRenderHookOptions = {}
+  }: ExtendedRenderHookOptions<U> = {}
 ) {
   function Wrapper({children}: PropsWithChildren) {
     return (
