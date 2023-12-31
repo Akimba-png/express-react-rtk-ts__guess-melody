@@ -5,15 +5,17 @@ import {
   incrementStep
 } from '../store/slices/game-process-slice/game-process-slice';
 
-type Variant = {
+export type Variant = {
   src: string;
   genre: string;
 }
 
+type UseGenreAnswerReturn = [(id: number) => void, () => void];
+
 const useGenreAnswer = (
   correctValue: string,
   variants: Variant[]
-): [(id: number) => void, () => void] => {
+): UseGenreAnswerReturn => {
 
   const [userAnswers, setUserAnswers] = useState<boolean[]>(
     new Array(variants.length).fill(false)
