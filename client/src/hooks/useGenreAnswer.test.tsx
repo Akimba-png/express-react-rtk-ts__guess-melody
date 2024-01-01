@@ -1,10 +1,10 @@
 import { act } from 'react-dom/test-utils';
-import { renderHookWithProviders } from '../utils/test-utils';
 import { RootState } from '../store/store';
 import {
   type Variant,
   useGenreAnswer,
 } from './useGenreAnwer';
+import { renderHookWithProviders } from '../utils/test-utils';
 import { LoadingStatus } from '../constants/const';
 
 const initialState: RootState = {
