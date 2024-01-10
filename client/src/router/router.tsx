@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { WelcomeScreen } from '../screens/welcome-screen/welcome-screen';
 import { LoginScreen } from '../screens/login-screen/login-screen';
+import { SignupScreen } from '../screens/sigup-screen/signup-screen';
 import { GameScreen } from '../screens/game-screen/game-screen';
 import { SuccessScreen } from '../screens/success-screen/success-screen';
 import { FailScreen } from '../screens/fail-screen/fail-screen';
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
   {
     path: AppRoute.Login,
     element: <LoginScreen />,
+  },
+  {
+    path: AppRoute.Signup,
+    element: <SignupScreen />
   },
   {
     path: AppRoute.Game,

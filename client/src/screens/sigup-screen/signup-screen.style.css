@@ -1,0 +1,25 @@
+.login__form--signup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  gap: 30px;
+  margin-top: 120px;
+}
+
+.login__form--signup .login__field {
+  width: auto;
+}
+
+.login__form--signup .login__label {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}
+
+.login__form--signup .login__input {
+  width: auto;
+}
+
+.login__form--signup .login__button {
+  width: 80%;
+}
