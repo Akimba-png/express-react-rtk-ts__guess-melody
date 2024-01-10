@@ -1,6 +1,7 @@
 export enum AppRoute {
   Main = '/',
   Login = '/login',
+  Signup = '/signup',
   Game = '/game',
   Success = '/success',
   Fail = '/fail',
