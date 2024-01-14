@@ -2,12 +2,14 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { createApi } from '../http/create-api';
 import { gameDataSlice } from './slices/game-data-slice/game-data-slice';
 import { gameProcessSlice } from './slices/game-process-slice/game-process-slice';
+import { userAuthSlice } from './slices/user-auth-slice/user-auth-slice';
 
 const api = createApi();
 
 const rootReducer = combineReducers({
   [gameDataSlice.name]: gameDataSlice.reducer,
   [gameProcessSlice.name]: gameProcessSlice.reducer,
+  [userAuthSlice.name]: userAuthSlice.reducer,
 });
 
 export const setupStore = (preloadedState: Partial<RootState> = {}) => {
