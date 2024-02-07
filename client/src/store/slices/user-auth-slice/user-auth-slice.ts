@@ -8,15 +8,17 @@ export type UserAuthState = {
   authStatus: AuthStatus;
   loadingStatus: LoadingStatus;
   error: string;
-}
+};
+
+export const DEFAULT_USER: User = {
+  id: '',
+  name: '',
+  email: '',
+  accessToken: '',
+};
 
 const userAuthState: UserAuthState = {
-  user: {
-    id: '',
-    name: '',
-    email: '',
-    accessToken: '',
-  },
+  user: DEFAULT_USER,
   authStatus: AuthStatus.Unknown,
   loadingStatus: LoadingStatus.Idle,
   error: '',

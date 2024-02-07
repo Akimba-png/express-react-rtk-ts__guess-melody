@@ -4,7 +4,7 @@ import { generateGenreQuestion } from '../utils/mock';
 import { renderHookWithProviders } from './../utils/test-utils';
 import { LoadingStatus } from '../constants/const';
 
-const initialState: RootState = {
+const initialState: Partial<RootState> = {
   gameData: {
     questions: [],
     loadingStatus: LoadingStatus.Idle,
