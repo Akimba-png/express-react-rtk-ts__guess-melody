@@ -1,8 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-// import { WelcomeScreen } from './welcome-screen';
+import { WelcomeScreen } from './welcome-screen';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { AppRoute } from '../../constants/const';
-import { WelcomeScreen } from './welcome-screen';
 
 const router = createMemoryRouter([
   {

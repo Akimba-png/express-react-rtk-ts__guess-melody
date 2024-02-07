@@ -7,12 +7,30 @@ import { generateArtistQuestion, generateGenreQuestion } from '../../utils/mock'
 import { AppRoute, LoadingStatus } from '../../constants/const';
 
 describe('Component GameScreen', () => {
+  let router: ReturnType<typeof createMemoryRouter>;
   beforeEach(() => {
     vi.resetAllMocks();
+    router = createMemoryRouter([
+      {
+        path: AppRoute.Game,
+        element: <GameScreen />,
+      },
+      {
+        path: AppRoute.Fail,
+        element: <h1>Game over</h1>,
+      },
+      {
+        path: AppRoute.Main,
+        element: <h1>Main screen</h1>,
+      },
+    ], {
+      initialEntries: [AppRoute.Game],
+      initialIndex: 0,
+    });
   });
 
   it('should render correctly whith no questions', () => {
-    renderWithProviders(<GameScreen />);
+    renderWithProviders(<RouterProvider router={router}/>);
     expect(screen.getByText(/А вопросов-то и нет/)).toBeInTheDocument();
   });
 
@@ -25,13 +43,13 @@ describe('Component GameScreen', () => {
       }
     };
     const store = setupStore(initialState);
-    renderWithProviders(<GameScreen />, {store});
+    renderWithProviders(<RouterProvider router={router}/>, {store});
     expect(screen.getByText(/loading/)).toBeInTheDocument();
   });
 
   it('should navigate to fail screen', () => {
     const mockQuestion = generateGenreQuestion();
-    const initialState: RootState = {
+    const initialState: Partial<RootState> = {
       gameProcess: {
         step: 0,
         errorCount: 4,
@@ -43,26 +61,13 @@ describe('Component GameScreen', () => {
       },
     }
     const store = setupStore(initialState);
-    const router = createMemoryRouter([
-      {
-        path: AppRoute.Fail,
-        element: <h1>Game over</h1>,
-      },
-      {
-        path: AppRoute.Game,
-        element: <GameScreen />,
-      },
-    ], {
-      initialEntries: [AppRoute.Game],
-      initialIndex: 0,
-    });
     renderWithProviders(<RouterProvider router={router}/>, {store});
     expect(screen.getByText(/Game over/)).toBeInTheDocument();
   });
 
   it('should navigate to success screen', () => {
     const mockQuestion = generateGenreQuestion();
-    const initialState: RootState = {
+    const initialState: Partial<RootState> = {
       gameProcess: {
         step: 1,
         errorCount: 0,
@@ -96,7 +101,7 @@ describe('Component GameScreen', () => {
   it('should render artistGame when question type is artist', () => {
     const mockQuestion = generateArtistQuestion();
     HTMLMediaElement.prototype.pause = vi.fn();
-    const initialState: RootState = {
+    const initialState: Partial<RootState> = {
       gameData: {
         questions: [mockQuestion],
         loadingStatus: LoadingStatus.Idle,
@@ -108,7 +113,7 @@ describe('Component GameScreen', () => {
       },
     };
     renderWithProviders(
-      <GameScreen/>, {
+      <RouterProvider router={router}/>, {
       preloadedState: initialState,
     });
     expect(screen.getByText(/Кто исполняет эту песню?/)).toBeInTheDocument();
@@ -116,7 +121,7 @@ describe('Component GameScreen', () => {
 
   it('should render genreGame when question type is genre', () => {
     const mockQuestion = generateGenreQuestion();
-    const initialState: RootState = {
+    const initialState: Partial<RootState> = {
       gameData: {
         questions: [mockQuestion],
         loadingStatus: LoadingStatus.Idle,
@@ -128,7 +133,7 @@ describe('Component GameScreen', () => {
       },
     };
     HTMLMediaElement.prototype.pause = vi.fn();
-    renderWithProviders(<GameScreen/>, {
+    renderWithProviders(<RouterProvider router={router}/>, {
       preloadedState: initialState,
     });
     expect(screen.getByText(/^Выберите [a-zA-z]+ треки$/)).toBeInTheDocument();
