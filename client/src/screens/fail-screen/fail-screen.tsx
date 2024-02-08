@@ -1,13 +1,18 @@
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/store-hooks';
 import { AppRoute } from '../../constants/const';
 import {
   resetGame
  } from '../../store/slices/game-process-slice/game-process-slice';
+import { useCheckAuth } from '../../hooks/useCheckAuth';
 
 function FailScreen(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { isAuth } = useCheckAuth();
+  if (!isAuth) {
+    return <Navigate to={AppRoute.Signup}/>
+  }
   return (
     <section className="result">
       <div className="result__logo">
