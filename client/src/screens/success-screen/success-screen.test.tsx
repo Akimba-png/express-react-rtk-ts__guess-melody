@@ -7,7 +7,8 @@ import { fireEvent, screen } from '@testing-library/react';
 import { SuccessScreen } from './success-screen';
 import { RootState } from '../../store/store';
 import { renderWithProviders } from '../../utils/test-utils';
-import { AppRoute } from '../../constants/const';
+import { AppRoute, AuthStatus } from '../../constants/const';
+import { UserAuthState } from '../../store/slices/user-auth-slice/user-auth-slice';
 
 const MOCK_STATE = {
   Step: 3,
@@ -20,6 +21,9 @@ describe('Component SuccessScreen', () => {
       step: MOCK_STATE.Step,
       errorCount: MOCK_STATE.ErrorCount,
     },
+    userAuthSlice: {
+      authStatus: AuthStatus.Auth,
+    } as UserAuthState,
   };
   const routes: RouteObject[] = [
     {
@@ -33,7 +37,11 @@ describe('Component SuccessScreen', () => {
     {
       path: AppRoute.Main,
       element: <h2>Main screen</h2>,
-    }
+    },
+    {
+      path: AppRoute.Signup,
+      element: <h2>Signup</h2>,
+    },
   ];
   const router = createMemoryRouter(routes);
 
@@ -58,7 +66,7 @@ describe('Component SuccessScreen', () => {
   });
 
   it('should navigate to Gamescreen on user play again interaction', () => {
-    renderWithProviders(<RouterProvider router={router} />);
+    renderWithProviders(<RouterProvider router={router} />, {preloadedState});
     const playAgainButton = screen.getByRole(
       'button', {name: /Сыграть ещё раз/}
     );
@@ -69,11 +77,19 @@ describe('Component SuccessScreen', () => {
   });
 
   it('should navigate to Main screen on user exit interaction', () => {
-    renderWithProviders(<RouterProvider router={router} />);
+    renderWithProviders(<RouterProvider router={router} />, {preloadedState});
     const exitButton = screen.getByRole('link', {name: /Выход/});
     fireEvent.click(exitButton);
     expect(
       screen.getByRole('heading', {name: 'Main screen'})
     ).toBeInTheDocument();
+  });
+
+  it('should redirect to Signup screen on unAuth', () => {
+    if (preloadedState.userAuthSlice) {
+      preloadedState.userAuthSlice.authStatus = AuthStatus.NotAuth;
+    }
+    renderWithProviders(<RouterProvider router={router}/>, {preloadedState});
+    expect(screen.getByRole('heading', {name: /Signup/})).toBeInTheDocument();
   });
 });

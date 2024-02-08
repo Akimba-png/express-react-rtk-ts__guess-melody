@@ -1,8 +1,9 @@
 import { type MouseEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from './../../hooks/store-hooks';
 import { resetGame } from '../../store/slices/game-process-slice/game-process-slice';
 import { AppRoute } from '../../constants/const';
+import { useCheckAuth } from '../../hooks/useCheckAuth';
 
 function SuccessScreen(): JSX.Element {
   const navigate = useNavigate();
@@ -13,6 +14,10 @@ function SuccessScreen(): JSX.Element {
     dispatch(resetGame());
     navigate(AppRoute.Game);
   };
+  const { isAuth } = useCheckAuth();
+  if (!isAuth) {
+    return <Navigate to={AppRoute.Signup}/>
+  }
   return (
     <section className="result">
       <div className="result-logout__wrapper">
