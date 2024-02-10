@@ -60,7 +60,7 @@ describe('Component SuccessScreen', () => {
     renderWithProviders(<RouterProvider router={router} />, {preloadedState});
     expect(
       screen.getByText(
-        `Вы ответили правильно на ${MOCK_STATE.Step} вопросов и совершили ${MOCK_STATE.ErrorCount} ошибки`
+        `Вы ответили правильно на ${MOCK_STATE.Step - MOCK_STATE.ErrorCount} вопросов и совершили ${MOCK_STATE.ErrorCount} ошибки`
       ),
     ).toBeInTheDocument();
   });

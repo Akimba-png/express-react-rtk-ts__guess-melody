@@ -35,7 +35,8 @@ function SuccessScreen(): JSX.Element {
       </div>
       <h2 className="result__title">Вы настоящий меломан!</h2>
       <p className="result__total">
-        Вы ответили правильно на {step} вопросов и совершили {errorCount} ошибки
+        Вы ответили правильно на {step - errorCount} вопросов
+        и совершили {errorCount} ошибки
       </p>
       <button
         className="replay"
