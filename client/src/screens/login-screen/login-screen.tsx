@@ -1,15 +1,24 @@
 import { MouseEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../hooks/store-hooks';
 import {
   resetGame
 } from '../../store/slices/game-process-slice/game-process-slice';
+import { Credentials } from '../../models/user';
 import { AppRoute } from '../../constants/const';
 import './login-screen.style.css';
 
 function LoginScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const {
+    register,
+    formState: {errors},
+    handleSubmit,
+  } = useForm<Credentials>();
+
+  const onSubmit = handleSubmit((data) => console.log(data));
 
   const handleReplayClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
@@ -29,12 +38,27 @@ function LoginScreen(): JSX.Element {
       </div>
       <h2 className="login__title">Вы настоящий меломан!</h2>
       <p className="login__text">Хотите узнать свой результат? Представтесь!</p>
-      <form className="login__form" action="">
+      <form
+        onSubmit={onSubmit}
+        className="login__form"
+        action=""
+      >
         <p className="login__field">
-          <label className="login__label" htmlFor="name">
+          <label className="login__label" htmlFor="email">
             Логин
           </label>
-          <input className="login__input" type="text" name="name" id="name" />
+          <input
+            className="login__input"
+            type="text"
+            id="email"
+            {...register('email', {
+              required: true,
+              pattern: /\w+@\w+/,
+            })}
+          />
+          {errors.email && (
+            <span className="login__error">Поле должно содежать @</span>
+          )}
         </p>
         <p className="login__field">
           <label className="login__label" htmlFor="password">
@@ -43,10 +67,15 @@ function LoginScreen(): JSX.Element {
           <input
             className="login__input"
             type="text"
-            name="password"
             id="password"
+            {...register('password', {
+              required: true,
+              minLength: 3,
+            })}
           />
-          <span className="login__error">Неверный пароль</span>
+          {errors.password && (
+            <span className="login__error">Минимум 3 символа</span>
+          )}
         </p>
         <button className="login__button button" type="submit">
           Войти
