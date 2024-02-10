@@ -6,6 +6,8 @@ import { AppRoute } from '../../constants/const';
 import './signup-screen.style.css';
 import { useForm } from 'react-hook-form';
 import { RegData } from '../../models/user';
+import { signup } from '../../store/thunk-actions/signup';
+import { toastService } from '../../services/toast-service';
 
 function SignupScreen(): JSX.Element {
   const navigate = useNavigate();
@@ -14,9 +16,19 @@ function SignupScreen(): JSX.Element {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<RegData>();
 
-  const onSubmit = handleSubmit((data) => {console.log(data)});
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      await dispatch(signup(data)).unwrap();
+      reset();
+      navigate(AppRoute.Game);
+    } catch (error) {
+      const e = error as string;
+      toastService.showErrorToast(e);
+    }
+  });
 
   const handleReplayClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
