@@ -1,3 +1,5 @@
+export const AUTHORIZATION = 'Authorization';
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -22,4 +24,5 @@ export enum ApiRoute {
   BaseUrl = 'http://localhost:5000',
   Questions = '/public/question',
   Signup = '/auth/signup',
+  Login = '/auth/login',
 }

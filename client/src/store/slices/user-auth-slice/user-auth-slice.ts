@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { type User } from '../../../models/user';
 import { AuthStatus, LoadingStatus } from '../../../constants/const';
 import { createSignupReducer } from '../../thunk-actions/signup';
+import { createLoginReducer } from '../../thunk-actions/login';
 
 export type UserAuthState = {
   user: User;
@@ -30,5 +31,6 @@ export const userAuthSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     createSignupReducer(builder);
+    createLoginReducer(builder);
   },
 });
