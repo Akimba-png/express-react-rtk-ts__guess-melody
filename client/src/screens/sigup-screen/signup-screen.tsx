@@ -1,5 +1,5 @@
 import { type MouseEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { resetGame } from '../../store/slices/game-process-slice/game-process-slice';
 import { useAppDispatch } from '../../hooks/store-hooks';
 import { AppRoute } from '../../constants/const';
@@ -110,7 +110,13 @@ function SignupScreen(): JSX.Element {
           Sigup
         </button>
       </form>
-      <button onClick={handleReplayClick} className="replay" type="button">
+      <Link
+        className="login__button button"
+        to={AppRoute.Login}
+      >
+        или войти
+      </Link>
+      <button onClick={handleReplayClick} className="replay replay--signup" type="button">
         Сыграть ещё раз
       </button>
     </section>
