@@ -1,14 +1,26 @@
 import { type MouseEvent } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from './../../hooks/store-hooks';
 import { resetGame } from '../../store/slices/game-process-slice/game-process-slice';
 import { AppRoute } from '../../constants/const';
 import { useCheckAuth } from '../../hooks/useCheckAuth';
+import { logout } from '../../store/thunk-actions/logout';
+import { toastService } from '../../services/toast-service';
+import './success-screen.style.css';
 
 function SuccessScreen(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { step, errorCount } = useAppSelector((state) => state.gameProcess);
+  const handleLogoutClick = async (evt: MouseEvent) => {
+    evt.preventDefault();
+    try {
+      await dispatch(logout()).unwrap();
+    } catch (error) {
+      const e = error as string;
+      toastService.showErrorToast(e);
+    }
+  };
   const handlePlayAgainClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
     dispatch(resetGame());
@@ -21,9 +33,12 @@ function SuccessScreen(): JSX.Element {
   return (
     <section className="result">
       <div className="result-logout__wrapper">
-        <Link className="result-logout__link" to={AppRoute.Main}>
+        <a
+          onClick={handleLogoutClick}
+          className="result-logout__link result-logout__link--exit"
+        >
           Выход
-        </Link>
+        </a>
       </div>
       <div className="result__logo">
         <img
