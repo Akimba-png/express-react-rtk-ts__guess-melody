@@ -5,9 +5,11 @@ import { useAppDispatch } from '../../hooks/store-hooks';
 import {
   resetGame
 } from '../../store/slices/game-process-slice/game-process-slice';
+import { login } from '../../store/thunk-actions/login';
 import { Credentials } from '../../models/user';
 import { AppRoute } from '../../constants/const';
 import './login-screen.style.css';
+import { toastService } from '../../services/toast-service';
 
 function LoginScreen(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -16,9 +18,19 @@ function LoginScreen(): JSX.Element {
     register,
     formState: {errors},
     handleSubmit,
+    reset,
   } = useForm<Credentials>();
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit(async (credentials: Credentials) => {
+    try {
+      await dispatch(login(credentials)).unwrap();
+      reset();
+      navigate(AppRoute.Game);
+    } catch (error) {
+      const e = error as string;
+      toastService.showErrorToast(e);
+    }
+  });
 
   const handleReplayClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
