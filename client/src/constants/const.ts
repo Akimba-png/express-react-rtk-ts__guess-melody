@@ -25,4 +25,5 @@ export enum ApiRoute {
   Questions = '/public/question',
   Signup = '/auth/signup',
   Login = '/auth/login',
+  Logout = '/auth/logout',
 }
