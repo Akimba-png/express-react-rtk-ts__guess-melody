@@ -7,15 +7,35 @@ import { fireEvent, screen } from '@testing-library/react';
 import { SuccessScreen } from './success-screen';
 import { RootState } from '../../store/store';
 import { renderWithProviders } from '../../utils/test-utils';
-import { AppRoute, AuthStatus } from '../../constants/const';
+import { ApiRoute, AppRoute, AuthStatus } from '../../constants/const';
 import { UserAuthState } from '../../store/slices/user-auth-slice/user-auth-slice';
+import { setupServer } from 'msw/node';
+import { HttpResponse, http } from 'msw';
+import { act } from 'react-dom/test-utils';
 
 const MOCK_STATE = {
   Step: 3,
   ErrorCount: 2,
 };
 
+const restHandlers = [
+  http.delete(ApiRoute.BaseUrl + ApiRoute.Logout, () => {
+    return HttpResponse.json();
+  }),
+];
+
+const server = setupServer(...restHandlers);
+
 describe('Component SuccessScreen', () => {
+  beforeAll(() => {
+    server.listen();
+  });
+  beforeEach(() => {
+    server.resetHandlers();
+  });
+  afterAll(() => {
+    server.close();
+  });
   const preloadedState: Partial<RootState> = {
     gameProcess: {
       step: MOCK_STATE.Step,
@@ -76,12 +96,12 @@ describe('Component SuccessScreen', () => {
     ).toBeInTheDocument();
   });
 
-  it('should navigate to Main screen on user exit interaction', () => {
+  it('should navigate to signup screen on user exit interaction', async () => {
     renderWithProviders(<RouterProvider router={router} />, {preloadedState});
-    const exitButton = screen.getByRole('link', {name: /Выход/});
-    fireEvent.click(exitButton);
+    const exitButton = screen.getByText(/Выход/);
+    await act(() => fireEvent.click(exitButton));
     expect(
-      screen.getByRole('heading', {name: 'Main screen'})
+      screen.getByRole('heading', {name: /Signup/})
     ).toBeInTheDocument();
   });
 
