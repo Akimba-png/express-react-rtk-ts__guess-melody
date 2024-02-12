@@ -1,5 +1,7 @@
-import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { tokenService } from '../services/token-service';
+import { toastService } from '../services/toast-service';
+import { User } from '../models/user';
 import { ApiRoute } from '../constants/const';
 
 export const createApi = () => {
@@ -18,9 +20,32 @@ export const createApi = () => {
     return response;
   }
 
-  const onFail = (error: any) => {
-    return Promise.reject(error);
-
+  const onFail = async (error: unknown) => {
+    const e = error as AxiosError<{message: string}>;
+    const config = e.config;
+    if (config && e.response && e.response.status === 401) {
+      try {
+        const response = await axios.get<User>(
+          `${ApiRoute.BaseUrl}${ApiRoute.Refresh}`,
+          {
+            timeout: 5000,
+            withCredentials: true,
+          }
+        );
+        const authorizationToken = response.data.accessToken;
+        tokenService.setToken(authorizationToken);
+        await api.request(config);
+        return;
+      } catch (e) {
+        console.log('unAuthorized');
+        return Promise.reject(e);
+      }
+    } else if (e.response) {
+      toastService.showErrorToast(e.response.data.message);
+      return Promise.reject(e);
+    }
+    toastService.showErrorToast(e.message);
+    return Promise.reject(e);
   };
 
   api.interceptors.request.use(onRequest);

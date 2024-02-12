@@ -26,4 +26,5 @@ export enum ApiRoute {
   Signup = '/auth/signup',
   Login = '/auth/login',
   Logout = '/auth/logout',
+  Refresh = '/auth/refresh',
 }
