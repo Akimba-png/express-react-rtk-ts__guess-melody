@@ -2,9 +2,7 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { createApi } from '../http/create-api';
 import { gameDataSlice } from './slices/game-data-slice/game-data-slice';
 import { gameProcessSlice } from './slices/game-process-slice/game-process-slice';
-import { userAuthSlice } from './slices/user-auth-slice/user-auth-slice';
-
-const api = createApi();
+import { clientLogout, userAuthSlice } from './slices/user-auth-slice/user-auth-slice';
 
 const rootReducer = combineReducers({
   [gameDataSlice.name]: gameDataSlice.reducer,
@@ -12,8 +10,11 @@ const rootReducer = combineReducers({
   [userAuthSlice.name]: userAuthSlice.reducer,
 });
 
-export const setupStore = (preloadedState: Partial<RootState> = {}) => {
-  return configureStore({
+export const setupStore = (
+  preloadedState: Partial<RootState> = {},
+) => {
+  const api = createApi(() => store.dispatch(clientLogout()));
+  const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
       thunk: {
@@ -22,6 +23,7 @@ export const setupStore = (preloadedState: Partial<RootState> = {}) => {
     }),
     preloadedState,
   });
+  return store;
 };
 
 export type AppStore = ReturnType<typeof setupStore>;

@@ -5,6 +5,7 @@ import { createSignupReducer } from '../../thunk-actions/signup';
 import { createLoginReducer } from '../../thunk-actions/login';
 import { createLogoutReducer } from '../../thunk-actions/logout';
 import { createCheckAuthReducer } from '../../thunk-actions/check-auth';
+import { tokenService } from '../../../services/token-service';
 
 export type UserAuthState = {
   user: User;
@@ -30,7 +31,12 @@ const userAuthState: UserAuthState = {
 export const userAuthSlice = createSlice({
   name: 'userAuthSlice',
   initialState: userAuthState,
-  reducers: {},
+  reducers: {
+    clientLogout(state) {
+      state.authStatus = AuthStatus.NotAuth;
+      tokenService.resetToken();
+    },
+  },
   extraReducers: (builder) => {
     createSignupReducer(builder);
     createLoginReducer(builder);
@@ -38,3 +44,5 @@ export const userAuthSlice = createSlice({
     createCheckAuthReducer(builder);
   },
 });
+
+export const { clientLogout } = userAuthSlice.actions;

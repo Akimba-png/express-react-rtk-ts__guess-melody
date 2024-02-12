@@ -4,7 +4,7 @@ import { toastService } from '../services/toast-service';
 import { User } from '../models/user';
 import { ApiRoute } from '../constants/const';
 
-export const createApi = () => {
+export const createApi = (onUnAuth: () => void) => {
   const api = axios.create({
     baseURL: ApiRoute.BaseUrl,
     timeout: 5000,
@@ -37,7 +37,7 @@ export const createApi = () => {
         await api.request(config);
         return;
       } catch (e) {
-        console.log('unAuthorized');
+        onUnAuth();
         return Promise.reject(e);
       }
     } else if (e.response) {
