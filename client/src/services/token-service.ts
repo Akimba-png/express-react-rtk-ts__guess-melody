@@ -2,7 +2,7 @@ import { AUTHORIZATION } from '../constants/const';
 
 class TokenService {
   getToken() {
-    return localStorage.getItem(AUTHORIZATION);
+    return localStorage.getItem(AUTHORIZATION) ?? '';
   }
 
   setToken(token: string) {
