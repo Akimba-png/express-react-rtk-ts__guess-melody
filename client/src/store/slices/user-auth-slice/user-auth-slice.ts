@@ -4,6 +4,7 @@ import { AuthStatus, LoadingStatus } from '../../../constants/const';
 import { createSignupReducer } from '../../thunk-actions/signup';
 import { createLoginReducer } from '../../thunk-actions/login';
 import { createLogoutReducer } from '../../thunk-actions/logout';
+import { createCheckAuthReducer } from '../../thunk-actions/check-auth';
 
 export type UserAuthState = {
   user: User;
@@ -34,5 +35,6 @@ export const userAuthSlice = createSlice({
     createSignupReducer(builder);
     createLoginReducer(builder);
     createLogoutReducer(builder);
+    createCheckAuthReducer(builder);
   },
 });
