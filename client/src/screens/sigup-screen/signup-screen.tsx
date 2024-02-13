@@ -107,7 +107,7 @@ function SignupScreen(): JSX.Element {
           )}
         </p>
         <button className="login__button button" type="submit">
-          Sigup
+          Signup
         </button>
       </form>
       <Link
